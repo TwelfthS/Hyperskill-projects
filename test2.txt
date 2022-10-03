@@ -1,0 +1,70 @@
+const input = require('sync-input');
+let gifts = {
+  name: ["Teddy Bear", "Big Red Ball", "Huge Bear"//
+             , "Candy", "Stuffed Tiger", "Stuffed Dragon", "Skateboard", "Toy Car", "Basketball", "Scary Mask"],
+  id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+  price: ["10", "5", "50", "8", "15", "30", "100", "25", "20", "75"]
+}
+let check = [];
+let tickets = 0;
+console.log("WELCOME TO THE CARNIVAL GIFT SHOP!");
+console.log("Hello friend! Thank you for visiting the carnival!");
+console.log("Here's the list of gifts:");
+console.log();
+let x;
+for (x in gifts.name) {
+  console.log(`${gifts.id[x]}- ${gifts.name[x]}, Cost: ${gifts.price[x]} tickets`);
+}
+while (true) {
+  console.log("What do you want to do?\n1-Buy a gift 2-Add tickets 3-Check tickets 4-Show gifts 5-Exit the shop");
+  let ans = Number(input());
+  if (ans === 1) {
+    if (check.length === 10) {
+      console.log("Wow! There are no gifts to buy.");
+  } else {
+      console.log("Enter the number of the gift you want to get:")
+      let num = input();
+      let i = gifts.id.findIndex(i => i === num);
+      if (isNaN(num)) {
+        console.log("Please enter a valid number!");
+      } else if (num < 1 || num > 10) {
+          console.log("There is no gift with that number!");
+      } else if (tickets < gifts.price[i]) {
+         console.log("You don't have enough tickets to buy this gift.");
+      } else {
+        console.log(`Here you go, one ${gifts.name[i]}!`);
+        tickets = Number(tickets) - Number(gifts.price[i]);
+        check = check.concat(gifts.name.splice(i, 1));
+        gifts.price.splice(i, 1);
+        gifts.id.splice(i, 1);
+        console.log(`Total tickets: ${tickets}`);
+      }
+    }
+  } else if (ans === 2) {
+    console.log(`Enter the ticket amount:`);
+    let add = input();
+    if (isNaN(add) || add < 0 || add > 1000) {
+      console.log("Please enter a valid number between 0 and 1000.");
+    } else {
+      tickets = Number(tickets) + Number(add);
+      console.log(`Total tickets: ${tickets}`);
+    }
+  } else if (ans === 3) {
+    console.log(`Total tickets: ${tickets}`);
+  } else if (ans === 4) {
+    console.log("Here's the list of gifts:");
+    console.log();
+    if (check.length === 10) {
+      console.log("Wow! There are no gifts to buy.");
+    } else {
+      for (x in gifts.name) {
+        console.log(`${gifts.id[x]}- ${gifts.name[x]}, Cost: ${gifts.price[x]} tickets`);
+      }
+    }
+  } else if (ans === 5) {
+    break;
+  } else {
+    console.log("Please enter a valid number!");
+  }
+}
+console.log("Have a nice day!");
