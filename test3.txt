@@ -1,0 +1,66 @@
+const input = require('sync-input');
+let x = 0;
+let y = 0;
+let cur;
+console.log("Welcome to Currency Converter!");
+console.log(`1 USD equals 1 USD
+1 USD equals 113.5 JPY
+1 USD equals 0.89 EUR
+1 USD equals 74.36 RUB
+1 USD equals 0.75 GBP`);
+while (true) {
+  console.log("What do you want to do?");
+  let i = input("1-Convert currencies 2-Exit program\n");
+  if (i == 1) {
+    console.log("What do you want to convert?");
+    let from = input("From: ");
+    from = from.toUpperCase();
+    if (from == "JPY") {
+      y = 113.5;
+    } else if (from == "EUR") {
+      y = 0.89;
+    } else if (from == "RUB") {
+      y = 74.36;
+    } else if (from == "GBP") {
+      y = 0.75;
+    } else if(from == "USD") {
+      y = 1;
+    } else {
+      console.log("Unknown currency");
+    }
+    if (y != 0) {
+      cur = input("To: ");
+      cur = cur.toUpperCase();
+      if (cur == "JPY") {
+        x = 113.5;
+      } else if (cur == "EUR") {
+        x = 0.89;
+      } else if (cur == "RUB") {
+        x = 74.36;
+      } else if (cur == "GBP") {
+        x = 0.75;
+      } else if(cur == "USD") {
+        x = 1;
+      } else {
+        console.log("Unknown currency");
+      }
+    }
+    if (x != 0) {
+      let amount = input("Amount: ");
+      if (amount < 1) {
+        console.log("The amount cannot be less than 1");
+      } else if (isNaN(amount)) {
+        console.log("The amount has to be a number");
+      } else {
+        let dol = amount / y;
+        let ans = Number(dol * x).toFixed(4);
+        console.log(`Result: ${amount} ${from} equals ${ans} ${cur}`);
+      }
+    }
+  } else if (i == 2) {
+    console.log("Have a nice day!");
+    break;
+  } else {
+    console.log("Unknown input");
+  }
+}
