@@ -1,2 +1,2 @@
-# Test
+# Hyperskill-projects
 First repository
